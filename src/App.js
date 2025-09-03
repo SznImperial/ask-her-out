@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { db } from "./firebase";
-import { collection, addDoc } from "firebase/firestore";
 import "./App.css";
 
 function App() {
@@ -19,7 +17,10 @@ function App() {
         duration: Math.random() * 5 + 5,
       };
       setHearts((prev) => [...prev, heart]);
-      setTimeout(() => setHearts((prev) => prev.filter((h) => h.id !== heart.id)), heart.duration * 1000);
+      setTimeout(
+        () => setHearts((prev) => prev.filter((h) => h.id !== heart.id)),
+        heart.duration * 1000
+      );
     }, 500);
     return () => clearInterval(interval);
   }, []);
@@ -52,18 +53,13 @@ function App() {
     setTimeout(() => setBurst([]), 3000);
   };
 
-  const handleAnswer = async (choice) => {
+  const handleAnswer = (choice, form) => {
     setAnswer(choice);
 
-    // Log click in Firebase
-    try {
-      await addDoc(collection(db, "responses"), {
-        choice,
-        timestamp: Date.now(),
-      });
-      console.log("Logged:", choice);
-    } catch (error) {
-      console.error("Error logging response:", error);
+    // Submit to Netlify form
+    if (form) {
+      form.elements["choice"].value = choice;
+      form.submit();
     }
 
     // Heart burst only for positive answers
@@ -74,6 +70,16 @@ function App() {
 
   return (
     <div className="container">
+      {/* Hidden Netlify form */}
+      <form
+        name="responses"
+        method="POST"
+        data-netlify="true"
+        style={{ display: "none" }}
+      >
+        <input type="hidden" name="choice" />
+      </form>
+
       {/* Background Music */}
       <audio id="bg-music" loop playsInline>
         <source src="/music.mp3" type="audio/mpeg" />
@@ -121,33 +127,59 @@ function App() {
 
           <div className="speech">
             <p>
-              From the very first moment our paths crossed, I felt something I couldn’t explain… like the universe quietly whispering that you were going to mean something to me. 🌹
+              From the very first moment our paths crossed, I felt something I
+              couldn’t explain… like the universe quietly whispering that you
+              were going to mean something to me. 🌹
             </p>
             <p>
-              You’ve painted my days with colors I didn’t know I was missing, turning ordinary moments into memories I can’t stop replaying. 🎨
+              You’ve painted my days with colors I didn’t know I was missing,
+              turning ordinary moments into memories I can’t stop replaying. 🎨
             </p>
             <p>
-              Your smile feels like sunlight breaking through the clouds, and your voice is the calm that silences every storm inside me. ☀️🌊
+              Your smile feels like sunlight breaking through the clouds, and
+              your voice is the calm that silences every storm inside me. ☀️🌊
             </p>
             <p>
-              Every laugh we’ve shared, every glance, every little moment—it’s all etched in my heart like a story I never want to end. 📖✨
+              Every laugh we’ve shared, every glance, every little moment—it’s
+              all etched in my heart like a story I never want to end. 📖✨
             </p>
             <p>
-              Sometimes I catch myself smiling out of nowhere, only to realize it’s because of you. You’ve become my favorite thought, my sweetest distraction, and the reason I look forward to tomorrow. 💭💕
+              Sometimes I catch myself smiling out of nowhere, only to realize
+              it’s because of you. You’ve become my favorite thought, my
+              sweetest distraction, and the reason I look forward to tomorrow.
+              💭💕
             </p>
             <p>
-              And the truth is… I don’t want to just admire you from afar. I want to be the one who makes you feel special, cared for, and endlessly loved. 💞
+              And the truth is… I don’t want to just admire you from afar. I
+              want to be the one who makes you feel special, cared for, and
+              endlessly loved. 💞
             </p>
             <p className="final">
-              So here I am, not with flowers or grand gestures, but with the most genuine words I can give you… straight from the heart. ❤️
+              So here I am, not with flowers or grand gestures, but with the
+              most genuine words I can give you… straight from the heart. ❤️
             </p>
           </div>
 
           <div className="question">
             <h2>Will you be my girlfriend? 💍💘</h2>
-            <button onClick={() => handleAnswer("yes")} className="yesBtn">Yes 💖</button>
-            <button onClick={() => handleAnswer("ofCourse")} className="yesBtn">Of course 💕</button>
-            <button onClick={() => handleAnswer("no")} className="noBtn">No 😢</button>
+            <button
+              onClick={(e) => handleAnswer("yes", e.target.form)}
+              className="yesBtn"
+            >
+              Yes 💖
+            </button>
+            <button
+              onClick={(e) => handleAnswer("ofCourse", e.target.form)}
+              className="yesBtn"
+            >
+              Of course 💕
+            </button>
+            <button
+              onClick={(e) => handleAnswer("no", e.target.form)}
+              className="noBtn"
+            >
+              No 😢
+            </button>
           </div>
         </>
       ) : answer === "no" ? (
@@ -157,7 +189,10 @@ function App() {
         </div>
       ) : (
         <div className="answer">
-          <h1>You just made me the happiest person alive… I promise you’ll never regret this 💘✨</h1>
+          <h1>
+            You just made me the happiest person alive… I promise you’ll never
+            regret this 💘✨
+          </h1>
         </div>
       )}
     </div>
