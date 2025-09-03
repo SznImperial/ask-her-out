@@ -36,3 +36,286 @@
     transform: rotate(360deg);
   }
 }
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  font-family: "Segoe UI", sans-serif;
+  color: #fff;
+  text-align: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 2rem;
+}
+
+.intro {
+  font-size: 2.5rem;
+  animation: typing 3s steps(20), blink 0.5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid #fff;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.speech p {
+  font-size: 1.3rem;
+  margin: 1.2rem 0;
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+.speech p:nth-child(1) {
+  animation-delay: 1s;
+}
+.speech p:nth-child(2) {
+  animation-delay: 3s;
+}
+.speech p:nth-child(3) {
+  animation-delay: 5s;
+}
+.speech p:nth-child(4) {
+  animation-delay: 7s;
+}
+.speech p:nth-child(5) {
+  animation-delay: 9s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.question {
+  margin-top: 3rem;
+}
+
+.question h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.yesBtn {
+  background: #ff4081;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 0.5rem;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s ease-in-out;
+}
+.yesBtn:hover {
+  transform: scale(1.1);
+  background: #ff1c68;
+}
+
+.answer {
+  margin-top: 5rem;
+  animation: fadeIn 2s forwards;
+}
+
+.answer h1 {
+  font-size: 2rem;
+}
+
+.hearts {
+  font-size: 2rem;
+  margin-top: 2rem;
+  animation: floatHearts 2s infinite alternate;
+}
+
+@keyframes floatHearts {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-20px);
+  }
+}
+/* Falling hearts animation */
+.hearts-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.falling-heart {
+  position: absolute;
+  top: -50px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0.8;
+  }
+}
+/* Falling hearts */
+.hearts-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.falling-heart {
+  position: absolute;
+  top: -50px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0.8;
+  }
+}
+
+/* Burst hearts */
+.burst-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 999;
+}
+
+.burst-heart {
+  position: absolute;
+  animation: burst 1.5s forwards;
+}
+
+@keyframes burst {
+  0% {
+    opacity: 1;
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: translateY(-100px) scale(1) rotate(360deg);
+    opacity: 0;
+  }
+}
+.noBtn {
+  background: #555;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 0.5rem;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s ease-in-out;
+}
+.noBtn:hover {
+  transform: scale(1.1);
+  background: #333;
+}
+/* Falling hearts */
+.hearts-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.falling-heart {
+  position: absolute;
+  top: -50px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0.8;
+  }
+}
+
+/* Burst hearts */
+.burst-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 999;
+}
+
+.burst-heart {
+  position: absolute;
+  animation: burst 1.5s forwards;
+}
+
+@keyframes burst {
+  0% { opacity: 1; transform: scale(0.5); }
+  50% { transform: scale(1.5); }
+  100% { transform: translateY(-100px) scale(1) rotate(360deg); opacity: 0; }
+}
+
+/* Buttons */
+.yesBtn {
+  background: #ff5a8f;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 0.5rem;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s ease-in-out;
+}
+.yesBtn:hover { transform: scale(1.1); }
+
+.noBtn {
+  background: #555;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 0.5rem;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s ease-in-out;
+}
+.noBtn:hover { transform: scale(1.1); background: #333; }
