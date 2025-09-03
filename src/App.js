@@ -117,7 +117,7 @@ function App() {
 
       {!answer ? (
         <>
-          <h1 className="intro">Hey [Her Name]... 💖</h1>
+          <h1 className="intro">Hey Fisayo.....💖</h1>
 
           <div className="speech">
             <p>
